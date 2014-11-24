@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.1.1" timestamp="2014-11-25T00:44:23.716">
+<file name="/Users/user/mprojects/spring-petclinic/src/main/java/org/springframework/samples/petclinic/model/BaseEntity.java">
+<violation beginline="47" endline="47" begincolumn="17" endcolumn="31" rule="UselessParentheses" ruleset="Unnecessary" package="org.springframework.samples.petclinic.model" class="BaseEntity" method="isNew" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.1.1/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>
