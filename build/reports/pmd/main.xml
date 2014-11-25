@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2014-11-25T15:29:17.308">
+<pmd version="4.3" timestamp="2014-11-25T16:45:32.367">
 <file name="/home/mushfekur/mprojects/spring-petclinic/src/main/java/org/springframework/samples/petclinic/repository/jdbc/JdbcOwnerRepositoryImpl.java">
 <violation beginline="62" endline="72" begincolumn="12" endcolumn="5" rule="UnusedFormalParameter" ruleset="Unused Code Rules" package="org.springframework.samples.petclinic.repository.jdbc" class="JdbcOwnerRepositoryImpl" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedFormalParameter" priority="3">
 Avoid unused constructor parameters such as 'namedParameterJdbcTemplate'.
+</violation>
+</file>
+<file name="/home/mushfekur/mprojects/spring-petclinic/src/main/java/org/springframework/samples/petclinic/web/OwnerController.java">
+<violation beginline="65" endline="65" begincolumn="16" endcolumn="47" rule="AvoidDuplicateLiterals" ruleset="String and StringBuffer Rules" package="org.springframework.samples.petclinic.web" class="OwnerController" method="initCreationForm" externalInfoUrl="http://pmd.sourceforge.net/rules/strings.html#AvoidDuplicateLiterals" priority="3">
+The String literal &quot;owners/createOrUpdateOwnerForm&quot; appears 4 times in this file; the first occurrence is on line 65
+</violation>
+</file>
+<file name="/home/mushfekur/mprojects/spring-petclinic/src/main/java/org/springframework/samples/petclinic/web/PetController.java">
+<violation beginline="43" endline="43" begincolumn="20" endcolumn="24" rule="AvoidDuplicateLiterals" ruleset="String and StringBuffer Rules" package="org.springframework.samples.petclinic.web" externalInfoUrl="http://pmd.sourceforge.net/rules/strings.html#AvoidDuplicateLiterals" priority="3">
+The String literal &quot;pet&quot; appears 5 times in this file; the first occurrence is on line 43
+</violation>
+<violation beginline="70" endline="70" begincolumn="16" endcolumn="43" rule="AvoidDuplicateLiterals" ruleset="String and StringBuffer Rules" package="org.springframework.samples.petclinic.web" class="PetController" method="initCreationForm" externalInfoUrl="http://pmd.sourceforge.net/rules/strings.html#AvoidDuplicateLiterals" priority="3">
+The String literal &quot;pets/createOrUpdatePetForm&quot; appears 4 times in this file; the first occurrence is on line 70
+</violation>
+</file>
+<file name="/home/mushfekur/mprojects/spring-petclinic/src/main/java/org/springframework/samples/petclinic/web/PetValidator.java">
+<violation beginline="34" endline="34" begincolumn="40" endcolumn="49" rule="AvoidDuplicateLiterals" ruleset="String and StringBuffer Rules" package="org.springframework.samples.petclinic.web" class="PetValidator" method="validate" externalInfoUrl="http://pmd.sourceforge.net/rules/strings.html#AvoidDuplicateLiterals" priority="3">
+The String literal &quot;required&quot; appears 6 times in this file; the first occurrence is on line 34
 </violation>
 </file>
 </pmd>
