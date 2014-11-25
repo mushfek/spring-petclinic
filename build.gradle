@@ -2,9 +2,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'war'
 
-apply plugin: 'checkstyle'
-apply plugin: 'pmd'
-
 group = 'org.springframework.samples'
 version = '1.0.0-SNAPSHOT'
 
@@ -20,8 +17,8 @@ repositories {
     }
 }
 
+apply from: "$rootDir/pmd-profile.gradle"
 //apply from: "$rootDir/checkstyle-profile.gradle"
-//apply from: "$rootDir/pmd-profile.gradle"
 
 dependencies {
     compile group: 'org.jadira.usertype', name: 'usertype.core', version:'3.2.0.GA'

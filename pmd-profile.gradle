@@ -1,65 +1,32 @@
-configurations {
-    codequality
+apply plugin: 'pmd'
+
+reporting {
+    baseDir "$buildDir/reports"
 }
 
-repositories {
-    mavenCentral()
+pmd {
+    toolVersion = "4.3"
+    ignoreFailures = true
+    ruleSets = ["basic", "braces", "unusedcode"]
+//    ruleSetFiles = files("$rootDir/config/pmd/pmd-custom-ruleset.xml")
 }
 
-dependencies {
-    codequality group: 'pmd', name: 'pmd', version: '4.2.6'
-}
-
-task pmd(type: SuitePmdTask) {
-    ignoreFailures true
-    showViolations false
-}
-
-check.dependsOn(pmd)
-
-import org.gradle.api.internal.project.IsolatedAntBuilder
-
-/**
- * See parameters at http://pmd.sourceforge.net/pmd-4.2.6/ant-task.html
- */
-class SuitePmdTask extends DefaultTask {
-    @InputFile @Optional File rulesetFile  = new File("$project.rootDir/config/pmd/ruleset.xml")
-    @InputFile @Optional File xslFile = new File("$project.rootDir/config/pmd/pmd-nicerhtml.xsl")
-    @OutputFile @Optional File outputFile = new File("$project.buildDir/reports/pmd/pmd-${project.name}.xml")
-    FileCollection pmdClasspath = project.configurations.codequality
-    Boolean ignoreFailures = false
-    Boolean showViolations = true
-    Project gradleProject = project
-
-    def SuitePmdTask() {
-        description = 'Runs PMD against Android sourcesets.'
-        group = 'Code Quality'
+pmdMain {
+//    excludes = ["org/springframework/samples/petclinic/util/*.java"]
+    reports {
+        xml.enabled true
+        html.enabled false
     }
+}
 
-    @TaskAction
-    def runPmd() {
-        outputFile.parentFile.mkdirs()
-        def antBuilder = services.get(IsolatedAntBuilder)
-        antBuilder.withClasspath(pmdClasspath).execute {
-            ant.taskdef(name: 'pmd', classname: 'net.sourceforge.pmd.ant.PMDTask')
-            ant.pmd(shortFilenames: 'true',
-                    failonruleviolation: !ignoreFailures,
-                    rulesetfiles: rulesetFile.toURI().toString()) {
-                formatter(type: 'xml', toFile: outputFile, toConsole: showViolations)
-                fileset(dir: gradleProject.projectDir.getPath()) {
-                    gradleProject.android.sourceSets.each { sourceSet ->
-                        sourceSet.java.each { file ->
-                            include(name: gradleProject.relativePath(file))
-                        }
-                    }
-                }
-            }
+task pmdReport(dependsOn: pmdMain, group: 'verification', description: 'Generates a HTML report after executing PMD checks') << {
+    ant.xslt(
+            in: "$reporting.baseDir/pmd/main.xml",
+            style: "$rootDir/config/pmd/pmd-report-style.xslt",
+            out:"$reporting.baseDir/pmd/pmd-report.html"
+    )
+}
 
-            if (outputFile.exists() && xslFile != null && xslFile.exists()) {
-                ant.xslt(in: outputFile,
-                        style: xslFile,
-                        out: outputFile.absolutePath.replaceFirst(~/\.[^\.]+$/, ".html"))
-            }
-        }
-    }
+check {
+    dependsOn += ['pmdReport']
 }

@@ -1,7 +1,7 @@
-target/*
-.settings/*
-.classpath
-.project
-.idea
+.*
+!.gitignore
+
 *.iml
-/target
+
+**/target
+**/build/
